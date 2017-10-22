@@ -1,31 +1,20 @@
-import numpy
-import scipy
-import sklearn
-import collections, re
-import os
 import txt
+import valid_files
+from datetime import datetime
 
+start_time = datetime.now()
 
-#texts = ['procedente', 'improcedente']
-
-
-#def get_all_txt():
-#    for file in os.listdir('D:/ej4/datam'):
-#        # file = obtenha o radical
-#        # file = passe pelo stop_words
 newtxt = txt.Txt()
 filenames = newtxt.get_all_filenames()
 for file in filenames:    
     print(newtxt.get_path() + '\\' + file)
 
-#texto = open('teste.txt', 'r')
+stop_time = datetime.now()
+elapsed_time = stop_time - start_time
 
-#print(texto.read())
+print('\nElapsed time for {} files: {}'.format(newtxt.all_files_count, elapsed_time))
+print('Files taken {} \nDiscarded files {}.'.format( len(filenames), newtxt.all_files_count - len(filenames) ))
 
-#texts = [ 'umbigo umbigo']
+text_file = valid_files.Validate()
 
-
-#bagsofwords = [collections.Counter(re.findall(r'.+', txt)) for txt in texts]
-
-
-#print(bagsofwords)
+text_file.generate_txt(filenames)
